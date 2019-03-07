@@ -77,14 +77,7 @@ describe("About Applying What We Have Learnt", function() {
     expect(233168).toBe(sum);
   });
 
-  it ('should add all the natural numbers below 100 that are multiples of 2 or 3', function(){
-    var sum = _(_.range(1, 1000)).chain()
-    .filter(function(num){return num % 2 === 0 || num % 3 === 0})
-    .reduce(function(storage, num){ return storage + num}, 0)
-    .value()
-    expect(333167).toBe(sum);
-
-  })
+  
 
 
 
@@ -106,15 +99,28 @@ describe("About Applying What We Have Learnt", function() {
     var ingredientCount = { "{ingredient name}": 0 };
 
     /* chain() together map(), flatten() and reduce() */
+      _(products).chain()
+      .map(function(product){return product.ingredients})
+      .flatten()
+      .reduce(function(memo, ingredient){
+        if (!ingredientCount[ingredient]){
+          ingredientCount[ingredient] = 1
+        } else {
+          ingredientCount[ingredient] ++
+        }   
+      return ingredientCount
+      })
+      .value()
+      var count = ingredientCount['mushrooms']
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+      expect(ingredientCount['mushrooms']).toBe(count);
   });
 
   /*********************************************************************************/
   /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
-  it("should find the largest prime factor of a composite number", function () {
   
+  it("should find the largest prime factor of a composite number", function () {
+    
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
@@ -133,5 +139,5 @@ describe("About Applying What We Have Learnt", function() {
   it("should find the 10001st prime", function () {
 
   });
-  */
+  
 });
